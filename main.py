@@ -17,7 +17,7 @@ def cli():
     generate = subparser.add_parser("generate", help="Generate feature vector from dataset")
     generate.add_argument("--dataset-path", "-dp", required=True, type=str, help="Dataset path")
     generate.add_argument(
-        "--output-dir", "-op", required=True, type=str, help="Feature vector output dir"
+        "--output-dir", "-od", required=True, type=str, help="Feature vector output dir"
     )
 
     # Search sub-commands
@@ -43,6 +43,7 @@ def main():
         logging.info("Vectorizing dataset...")
         vectorized_dataset = vect.transform(dataset)
 
+        # Save vectors to file
         np.save(Path(args.output_dir) / "vectorized_dataset.npy", vectorized_dataset)
         logging.info("Vectors saved to vectorized_dataset.npy")
 
