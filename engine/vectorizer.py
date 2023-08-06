@@ -7,6 +7,8 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 from tqdm import tqdm
 
+from engine.utils import resize_with_padding
+
 
 class Vectorizer:
     def __init__(self) -> None:
@@ -17,7 +19,6 @@ class Vectorizer:
         self.transforms = transforms.Compose(
             [
                 transforms.ToTensor(),
-                transforms.Resize((224, 224)),
                 transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
             ]
         )
@@ -57,6 +58,7 @@ class Vectorizer:
         Returns:
             The preprocessed image.
         """
+        image = resize_with_padding(image, (224, 224))
         image = self.transforms(image)
-        image = torch.unsqueeze(image, 0)
+        image = torch.unsqueeze(image, 0)  # add batch dimension
         return image

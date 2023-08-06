@@ -32,6 +32,56 @@ def cosine_similarity(query_image_vector: np.ndarray, image_vectors: np.ndarray)
     return cosine_similarities
 
 
+def resize_with_padding(img: np.ndarray, size: Tuple[int, int], pad_color: int = 0) -> np.ndarray:
+    """
+    Resize an image with padding while maintaining its original aspect ratio.
+
+    Args:
+        img (np.ndarray): The input image as a NumPy array.
+        size (Tuple[int, int]): The desired output size in (width, height) format.
+        pad_color (int, optional): The color value for padding. Defaults to 0.
+
+    Returns:
+        np.ndarray: The resized image with padding.
+    """
+    h, w = img.shape[:2]
+    sw, sh = size
+
+    aspect = w / h
+    new_aspect = sw / sh
+    if aspect > new_aspect:
+        new_w = sw
+        new_h = np.round(new_w / aspect).astype(int)
+        pad_vert = abs((sh - new_h)) / 2
+        pad_top, pad_bot = np.floor(pad_vert).astype(int), np.ceil(pad_vert).astype(int)
+        pad_left, pad_right = 0, 0
+    elif aspect < new_aspect:
+        new_h = sh
+        new_w = np.round(new_h * aspect).astype(int)
+        pad_horz = abs((sw - new_w)) / 2
+        pad_left, pad_right = np.floor(pad_horz).astype(int), np.ceil(pad_horz).astype(int)
+        pad_top, pad_bot = 0, 0
+    else:
+        new_h, new_w = sh, sw
+        pad_left, pad_right, pad_top, pad_bot = 0, 0, 0, 0
+
+    if len(img.shape) == 3 and not isinstance(pad_color, (list, tuple, np.ndarray)):
+        pad_color = [pad_color] * 3
+
+    scaled_img = cv2.resize(img, (new_w, new_h))
+    scaled_img = cv2.copyMakeBorder(
+        scaled_img,
+        pad_top,
+        pad_bot,
+        pad_left,
+        pad_right,
+        borderType=cv2.BORDER_CONSTANT,
+        value=pad_color,
+    )
+
+    return scaled_img
+
+
 def read_dataset(path: str) -> Tuple[List[np.ndarray], List[str]]:
     path = Path(path)
 
