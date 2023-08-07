@@ -65,7 +65,7 @@ def resize_with_padding(img: np.ndarray, size: Tuple[int, int], pad_color: int =
         new_h, new_w = sh, sw
         pad_left, pad_right, pad_top, pad_bot = 0, 0, 0, 0
 
-    if len(img.shape) == 3 and not isinstance(pad_color, (list, tuple, np.ndarray)):
+    if len(img.shape) == 3:
         pad_color = [pad_color] * 3
 
     scaled_img = cv2.resize(img, (new_w, new_h))
@@ -79,7 +79,7 @@ def resize_with_padding(img: np.ndarray, size: Tuple[int, int], pad_color: int =
         value=pad_color,
     )
 
-    return scaled_img
+    return scaled_img, new_w, new_h, pad_left, pad_top
 
 
 def read_dataset(path: str) -> Tuple[List[np.ndarray], List[str]]:

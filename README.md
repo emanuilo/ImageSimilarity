@@ -50,3 +50,8 @@ python main.py search \
     --dataset-path data/simple_image_retrieval_dataset/image-db \
     --vectors-path ./vectorized_dataset.npy
 ```
+
+### Run tests
+```
+pytest
+```

@@ -58,7 +58,7 @@ class Vectorizer:
         Returns:
             The preprocessed image.
         """
-        image = resize_with_padding(image, (224, 224))
+        image, _, _, _, _ = resize_with_padding(image, (224, 224))
         image = self.transforms(image)
         image = torch.unsqueeze(image, 0)  # add batch dimension
         return image
