@@ -12,7 +12,7 @@ from engine.utils import resize_with_padding
 
 class Vectorizer:
     def __init__(self) -> None:
-        self.model = models.resnet50(pretrained=True)
+        self.model = models.resnet50(weights="ResNet50_Weights.IMAGENET1K_V1")
         self.model.eval()
         self.model = torch.nn.Sequential(OrderedDict([*(list(self.model.named_children())[:-1])]))
 
