@@ -24,9 +24,7 @@ def cli():
     search = subparser.add_parser("search", help="Image search")
     search.add_argument("--input-image", "-im", required=True, type=str, help="Input image")
     search.add_argument("--dataset-path", "-dp", required=True, type=str, help="Dataset path")
-    search.add_argument(
-        "--vectors-path", "-vp", required=False, type=str, help="Vectors file path"
-    )
+    search.add_argument("--vectors-path", "-vp", required=True, type=str, help="Vectors file path")
 
     return parser
 
@@ -61,7 +59,8 @@ def main():
         result = eng.most_similar(image)
 
         # Create a collage
-        utils.create_collage(image, result, dataset, image_names)
+        collage_file_name = Path(args.input_image).stem + "_result.png"
+        utils.create_collage(image, str(collage_file_name), result, dataset, image_names)
 
 
 if __name__ == "__main__":

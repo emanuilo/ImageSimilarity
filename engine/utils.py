@@ -109,6 +109,7 @@ def read_dataset(path: str) -> Tuple[List[np.ndarray], List[str]]:
 
 def create_collage(
     query_image: np.ndarray,
+    output_path: str,
     result: List[Tuple[float, str]],
     dataset: List[np.ndarray],
     image_names: List[str],
@@ -127,4 +128,4 @@ def create_collage(
         axs[i + 1].set_title(f"{name}\nSimilarity: {score:.3f}")
 
     plt.tight_layout()
-    plt.savefig("result.png")
+    plt.savefig(output_path)

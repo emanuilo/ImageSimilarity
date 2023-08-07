@@ -31,7 +31,7 @@ python main.py generate --dataset-path data/simple_image_retrieval_dataset/image
 
 ### Search similar image
 ```
-usage: main.py search [-h] --input-image INPUT_IMAGE --dataset-path DATASET_PATH [--vectors-path VECTORS_PATH]
+usage: main.py search [-h] --input-image INPUT_IMAGE --dataset-path DATASET_PATH --vectors-path VECTORS_PATH
 
 options:
   -h, --help            show this help message and exit
