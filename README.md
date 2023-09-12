@@ -1,4 +1,5 @@
-# Simple Image Retrieval
+# Image Similarity
+Utilize cosine similarity computations applied to feature vectors derived from the ResNet50 model to extract analogous images from the designated dataset.
 
 ## Setup
 ### Install requirements
@@ -9,7 +10,7 @@
 `pre-commit install`
 
 ### Download dataset
-* Download the dataset and extract it to `data/` directory.
+* Download the dataset and extract it to `dataset/` directory.
 
 ## Usage
 ### Generate feature vector
@@ -26,7 +27,7 @@ options:
 
 * Example
 ```
-python main.py generate --dataset-path data/simple_image_retrieval_dataset/image-db --output-dir .
+python main.py generate --dataset-path dataset/ --output-dir .
 ```
 
 ### Search similar image
@@ -46,8 +47,8 @@ options:
 * Example
 ```
 python main.py search \
-    --input-image data/simple_image_retrieval_dataset/test-cases/car.jpg \
-    --dataset-path data/simple_image_retrieval_dataset/image-db \
+    --input-image images/car.jpg \
+    --dataset-path dataset/ \
     --vectors-path ./vectorized_dataset.npy
 ```
 
