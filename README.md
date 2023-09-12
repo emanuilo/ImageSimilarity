@@ -1,6 +1,8 @@
 # Image Similarity
 Utilize cosine similarity computations applied to feature vectors derived from the ResNet50 model to extract analogous images from the designated dataset.
 
+![car_result](car_result.png)
+
 ## Setup
 ### Install requirements
 <!-- `pip install pre-commit==2.13.0` -->
